@@ -8,8 +8,12 @@ TODO: when switch away tool, clear the Ink canvas
 
 **********************************/
 
-Ink.MINIMUM_RADIUS = Node.DEFAULT_RADIUS;
-Ink.SNAP_TO_RADIUS = 25;
+// Ink.MINIMUM_RADIUS = Node.DEFAULT_RADIUS;
+// Ink.SNAP_TO_RADIUS = 25;
+Ink.SNAP_TO_RADII = [25, 40, 60];
+Ink.MINIMUM_RADIUS = 25
+Ink.RADIUS_INTERVAL = 20
+
 
 function Ink(loopy){
 
@@ -178,16 +182,16 @@ function Ink(loopy){
 			var x = (bounds.left+bounds.right)/2;
 			var y = (bounds.top+bounds.bottom)/2;
 			var r = ((bounds.width/2)+(bounds.height/2))/2;
+			// var r = 25 + Math.floor(60 * Math.random());
+			console.log(r)
 
 			// Circle can't be TOO smol
-			if(r>15){
+			if (r > Ink.MINIMUM_RADIUS) {
 
-				// Snap to radius
-				/*r = Math.round(r/Ink.SNAP_TO_RADIUS)*Ink.SNAP_TO_RADIUS;
-				if(r<Ink.MINIMUM_RADIUS) r=Ink.MINIMUM_RADIUS;*/
-
-				// LOCK TO JUST SMALLEST CIRCLE.
-				r = Ink.MINIMUM_RADIUS;
+				// snap to intervals of 20
+				if (r<Ink.MINIMUM_RADIUS) r=Ink.MINIMUM_RADIUS;
+				else r = Ink.RADIUS_INTERVAL * Math.round(r/20)
+				console.log(`Snap to: ${r}`)
 
 				// Make that node!
 				var newNode = loopy.model.addNode({

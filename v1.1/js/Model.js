@@ -31,7 +31,7 @@ function Model(loopy){
 		return self.nodeByID[id];
 	};
 
-	// Remove Node
+	// Add Node
 	self.addNode = function(config){
 
 		// Model's been changed!
