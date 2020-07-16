@@ -156,13 +156,15 @@ function Edge(model, config){
 			}else{
 				blend = 1;
 			}
-			var signalColor = _blendColors(fromColor, toColor, blend);
+			// var signalColor = _blendColors(fromColor, toColor, blend);
+			var signalColor = 'green'
 
 			// Also, tween the scaleY, flipping, IF STRENGTH<0
 			if(self.strength<0){
 				// sin/cos-animate it for niceness.
 				var flip = Math.cos(blend*Math.PI); // (0,1) -> (1,-1)
-				ctx.scale(1, flip);
+				// ctx.scale(1, flip);
+				signalColor = 'red'
 			}
 
 			// Signal's age = alpha.
@@ -173,14 +175,22 @@ function Edge(model, config){
 			}
 
 			// Draw an arrow
+			// ctx.beginPath();
+			// ctx.moveTo(-2,0);
+			// ctx.lineTo(0,-2);
+			// ctx.lineTo(2,0);
+			// ctx.lineTo(1,0);
+			// ctx.lineTo(1,2);
+			// ctx.lineTo(-1,2);
+			// ctx.lineTo(-1,0);
+			// ctx.fillStyle = signalColor;
+			// ctx.fill();
+
+			// Colored bubble
 			ctx.beginPath();
-			ctx.moveTo(-2,0);
-			ctx.lineTo(0,-2);
-			ctx.lineTo(2,0);
-			ctx.lineTo(1,0);
-			ctx.lineTo(1,2);
-			ctx.lineTo(-1,2);
-			ctx.lineTo(-1,0);
+			var bubbleRadius = 1; // radius
+			// _circleRadius = _circleRadius*0.8 + _circleRadiusGoto*0.2;
+			ctx.arc(0, 0, bubbleRadius, 0, Math.TAU, false);
 			ctx.fillStyle = signalColor;
 			ctx.fill();
 
